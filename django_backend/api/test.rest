@@ -1,0 +1,9 @@
+POST http://localhost:8000/api/events/
+Content-Type: application/json
+
+{
+    "title": "Concert",
+    "description": "Concert à Paris de jsp",
+    "date": "2026-04-21T20:00:00",
+    "status": "active"
+}
