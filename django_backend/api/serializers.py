@@ -2,9 +2,6 @@ from rest_framework import serializers
 from .models import Event, Participant, Registration
 
 
-# ─────────────────────────────────────────────
-# PARTICIPANT
-# ─────────────────────────────────────────────
 
 class ParticipantSerializer(serializers.ModelSerializer):
 
@@ -12,20 +9,7 @@ class ParticipantSerializer(serializers.ModelSerializer):
         model = Participant
         fields = ['id', 'name', 'email']
 
-    def validate_email(self, value):
-        """Email en minuscules + unicité vérifiée à la mise à jour."""
-        value = value.lower()
-        qs = Participant.objects.filter(email=value)
-        if self.instance:
-            qs = qs.exclude(pk=self.instance.pk)
-        if qs.exists():
-            raise serializers.ValidationError("Un participant avec cet email existe déjà.")
-        return value
 
-
-# ─────────────────────────────────────────────
-# EVENT
-# ─────────────────────────────────────────────
 
 class EventSerializer(serializers.ModelSerializer):
 
@@ -33,10 +17,13 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         fields = ['id', 'title', 'description', 'date', 'status']
 
+    def validate_date(self, value):
+        from django.utils.timezone import now
+        if value < now():
+            raise serializers.ValidationError("Event date cannot be in the past.")
+        return value
 
-# ─────────────────────────────────────────────
-# REGISTRATION
-# ─────────────────────────────────────────────
+
 
 class RegistrationSerializer(serializers.ModelSerializer):
     """
@@ -82,28 +69,3 @@ class RegistrationSerializer(serializers.ModelSerializer):
                 )
         return data
 
-
-# ─────────────────────────────────────────────
-# EVENT DETAIL (avec liste des inscrits)
-# ─────────────────────────────────────────────
-
-class RegistrationListSerializer(serializers.ModelSerializer):
-    """Version légère pour lister les inscrits d'un événement."""
-
-    participant = ParticipantSerializer(read_only=True)
-
-    class Meta:
-        model = Registration
-        fields = ['id', 'participant', 'registered_at']
-
-
-class EventDetailSerializer(EventSerializer):
-    """
-    Étend EventSerializer en ajoutant la liste des participants inscrits.
-    Utilisé uniquement en GET /events/{id}/.
-    """
-
-    registrations = RegistrationListSerializer(many=True, read_only=True)
-
-    class Meta(EventSerializer.Meta):
-        fields = EventSerializer.Meta.fields + ['registrations']
