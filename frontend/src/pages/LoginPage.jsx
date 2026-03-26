@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api/api';
 import '../styles/LoginPage.css';
+import { setToken } from '../store/authStore';
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ function LoginPage() {
     try {
       const response = await login(formData.username, formData.password);
       const token = response.data.token;
-      localStorage.setItem('token', token);
+      setToken(token);
       navigate('/');
     } catch (err) {
       setError('Identifiants incorrects. Veuillez réessayer.');
