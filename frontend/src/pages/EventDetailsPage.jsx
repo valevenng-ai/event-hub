@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getEvent } from '../api/api';
-import '../styles/EventDetailPage.css';
+import '../styles/EventDetailsPage.css';
 
 function EventDetailsPage() {
   const { id } = useParams();
@@ -109,4 +109,4 @@ function EventDetailsPage() {
   );
 }
 
-export default EventDetailPage;
+export default EventDetailsPage;
