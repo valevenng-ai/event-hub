@@ -32,3 +32,12 @@ Content-Type: application/json
 {
     "status": "inactive"
 }
+
+###
+POST http://localhost:8000/api/auth/login/
+Content-Type: application/json
+
+{
+    "username": "admintest",
+    "password": "admintest"
+}

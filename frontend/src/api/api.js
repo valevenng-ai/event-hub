@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { isAuthed } from '../store/authStore';
 
 const api = axios.create({
     baseURL: process.env.REACT_APP_API_BASE
@@ -6,8 +7,7 @@ const api = axios.create({
 
 // Pour ajouter automatiquement le token dans les requête
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
+  if (isAuthed) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
