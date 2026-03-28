@@ -56,7 +56,7 @@
 
 .events-filters select:focus,
 .events-filters input:focus {
-  border-color: #f5a623;
+  border-color: #b44fff;
 }
 
 .btn-reset {
@@ -110,7 +110,7 @@
 }
 
 .event-card:hover {
-  border-color: #f5a623;
+  border-color: #b44fff;
   transform: translateY(-2px);
 }
 
@@ -159,6 +159,6 @@
 
 .event-card-footer {
   font-size: 13px;
-  color: #f5a623;
+  color: #b44fff;
   margin-top: 4px;
 }

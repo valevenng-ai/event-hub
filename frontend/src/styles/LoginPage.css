@@ -44,7 +44,7 @@
 .login-logo {
   width: 52px;
   height: 52px;
-  background: linear-gradient(135deg, #f5a623, #e8621a);
+  background: linear-gradient(135deg, #b44fff, #8b2fc9);
   border-radius: 12px;
   display: inline-flex;
   align-items: center;
@@ -53,7 +53,7 @@
   font-size: 18px;
   color: #fff;
   margin-bottom: 16px;
-  box-shadow: 0 8px 24px rgba(245, 166, 35, 0.3);
+  box-shadow: 0 8px 24px rgba(180, 79, 255, 0.3);
 }
 
 .login-header h1 {
@@ -109,8 +109,8 @@
 }
 
 .form-group input:focus {
-  border-color: #f5a623;
-  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.1);
+  border-color: #b44fff;
+  box-shadow: 0 0 0 3px rgba(180, 79, 255, 0.1);
 }
 
 /* ── Error ── */
@@ -127,7 +127,7 @@
 /* ── Button ── */
 
 .login-btn {
-  background: linear-gradient(135deg, #f5a623, #e8621a);
+  background: linear-gradient(135deg, #b44fff, #8b2fc9);
   color: #fff;
   border: none;
   border-radius: 8px;

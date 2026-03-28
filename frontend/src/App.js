@@ -6,6 +6,7 @@ import EventsPage from "./pages/EventsPage";
 import EventDetailsPage from "./pages/EventDetailsPage";
 import ParticipantsPage from "./pages/ParticipantsPage";
 
+
 function App() {
   return (
     <BrowserRouter>

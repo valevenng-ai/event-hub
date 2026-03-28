@@ -54,7 +54,6 @@ function EventDetailsPage() {
       <button className="btn-back" onClick={() => navigate('/events')}>
         ← Retour aux événements
       </button>
-
       {/* Header */}
       <div className="detail-header">
         <div className="detail-header-top">
