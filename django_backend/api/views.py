@@ -2,6 +2,9 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
 
 from .models import Event, Participant, Registration
 from .serializers import (
@@ -130,3 +133,34 @@ class RegistrationViewSet(viewsets.ModelViewSet):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+class CustomLoginView(ObtainAuthToken):
+    """
+    Vue de login personnalisée qui retourne le token ET le rôle de l'utilisateur.
+    Réponse : { "token": "abc123", "role": "admin" | "viewer" }
+    """
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(
+            data=request.data,
+            context={'request': request}
+        )
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+
+        # Récupère ou crée le token
+        token, created = Token.objects.get_or_create(user=user)
+
+        # Détermine le rôle
+        # Un superuser ou membre du groupe "admin" → role = "admin"
+        # Sinon → role = "viewer"
+        if user.is_superuser or user.groups.filter(name='admin').exists():
+            role = 'admin'
+        else:
+            role = 'viewer'
+
+        return Response({
+            'token': token.key,
+            'role': role,
+            'username': user.username,
+        })
