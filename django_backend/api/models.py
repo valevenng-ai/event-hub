@@ -12,7 +12,7 @@ class Participant(models.Model):
     email = models.EmailField(unique=True)
 
 class Registration(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='registrations')
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     registered_at = models.DateTimeField(auto_now_add=True)
 

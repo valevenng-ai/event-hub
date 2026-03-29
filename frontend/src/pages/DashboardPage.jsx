@@ -67,7 +67,7 @@ function DashboardPage() {
         {/* Cartes stats */}
         <div className="stats-grid">
           <div className="stat-card" onClick={() => navigate('/events')}>
-            <div className="stat-icon">📅</div>
+            <div className="stat-icon"></div>
             <div className="stat-info">
               <span className="stat-number">{stats.events}</span>
               <span className="stat-label">Événements</span>
@@ -75,7 +75,7 @@ function DashboardPage() {
           </div>
 
           <div className="stat-card" onClick={() => navigate('/participants')}>
-            <div className="stat-icon">👥</div>
+            <div className="stat-icon"></div>
             <div className="stat-info">
               <span className="stat-number">{stats.participants}</span>
               <span className="stat-label">Participants</span>
@@ -83,7 +83,7 @@ function DashboardPage() {
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon">✅</div>
+            <div className="stat-icon"></div>
             <div className="stat-info">
               <span className="stat-number">{stats.registrations}</span>
               <span className="stat-label">Inscriptions</span>
