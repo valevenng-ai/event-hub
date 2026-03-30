@@ -14,7 +14,6 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-brand" onClick={() => navigate('/')}>
-        <div className="navbar-logo">EH</div>
         <span>EventHub</span>
       </div>
 

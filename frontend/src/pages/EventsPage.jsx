@@ -88,7 +88,7 @@ function EventsPage() {
         setFilterDate={setFilterDate}
       />
 
-      {admin && <button onClick={openCreate}>Créer</button>}
+      {admin && <button className="btn-primary" onClick={openCreate}>Créer</button>}
 
       <EventList
         events={events}

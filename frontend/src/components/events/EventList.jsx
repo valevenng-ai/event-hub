@@ -1,15 +1,14 @@
 import React from 'react';
 import EventCard from './EventCard';
-import '../../styles/events.css'
 
 function EventList({ events, loading, error, onEdit, onDelete, onClick, admin }) {
-  if (loading) return <p>Chargement...</p>;
-  if (error) return <p>{error}</p>;
-  if (events.length === 0) return <p>Aucun événement</p>;
+  if (loading) return <p className="state-msg">Chargement...</p>;
+  if (error) return <p className="state-msg error">{error}</p>;
+  if (events.length === 0) return <p className="state-msg">Aucun événement trouvé.</p>;
 
   return (
     <div className="events-grid">
-      {events.map(event => (
+      {events.map((event) => (
         <EventCard
           key={event.id}
           event={event}
