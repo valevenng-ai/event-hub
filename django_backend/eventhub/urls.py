@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from api.views import CustomLoginView   # ← import de la vue custom
+from api.views import CustomLoginView 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('api/auth/login/', CustomLoginView.as_view()),  # ← remplace obtain_auth_token
+    path('api/auth/login/', CustomLoginView.as_view()),
 ]

@@ -40,12 +40,12 @@ class EventViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Event.objects.all()
 
-        # Filtre par date (ex: ?date=2024-12-01)
+        # Filtre par date
         date = self.request.query_params.get('date')
         if date:
             queryset = queryset.filter(date__date=date)
 
-        # Filtre par statut (ex: ?status=published)
+        # Filtre par statut
         status_param = self.request.query_params.get('status')
         if status_param:
             queryset = queryset.filter(status=status_param)
@@ -80,7 +80,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Participant.objects.all()
 
-        # Recherche par nom ou email (ex: ?search=alice)
+        # Recherche par nom ou email
         search = self.request.query_params.get('search')
         if search:
             queryset = queryset.filter(name__icontains=search) | \
@@ -152,8 +152,8 @@ class CustomLoginView(ObtainAuthToken):
         token, created = Token.objects.get_or_create(user=user)
 
         # Détermine le rôle
-        # Un superuser ou membre du groupe "admin" → role = "admin"
-        # Sinon → role = "viewer"
+        # Un superuser ou membre du groupe admin, role = "admin"
+        # Sinon, role = "viewer"
         if user.is_superuser or user.groups.filter(name='admin').exists():
             role = 'admin'
         else:
