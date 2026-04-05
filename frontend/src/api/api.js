@@ -20,6 +20,9 @@ export const login = (username, password) =>
 export const logout = () =>
   api.post('/auth/logout/');
 
+export const register = (data) =>
+  api.post('/auth/register/', data);
+
 export default api;
 
  

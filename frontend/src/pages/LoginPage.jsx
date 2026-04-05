@@ -63,6 +63,13 @@ function LoginPage() {
           <button type="submit" className="login-btn" disabled={loading}>
             {loading ? 'Connexion...' : 'Se connecter'}
           </button>
+          <button
+            type="button"
+            className="login-register-link"
+            onClick={() => navigate('/register')}
+          >
+            Pas encore de compte ? Créer un compte
+          </button>
         </form>
       </div>
     </div>
