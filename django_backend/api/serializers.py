@@ -2,18 +2,15 @@ from rest_framework import serializers
 from .models import Event, Participant, Registration
 
 
-# ─────────────────────────────────────────────
 # PARTICIPANT
-# ─────────────────────────────────────────────
-
 class ParticipantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Participant
         fields = ['id', 'name', 'email']
 
+    # Vérifie si email en minuscule et unique
     def validate_email(self, value):
-        """Email en minuscules + unicité vérifiée à la mise à jour."""
         value = value.lower()
         qs = Participant.objects.filter(email=value)
         if self.instance:
@@ -23,10 +20,7 @@ class ParticipantSerializer(serializers.ModelSerializer):
         return value
 
 
-# ─────────────────────────────────────────────
 # EVENT
-# ─────────────────────────────────────────────
-
 class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -34,10 +28,8 @@ class EventSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'description', 'date', 'status']
 
 
-# ─────────────────────────────────────────────
-# REGISTRATION
-# ─────────────────────────────────────────────
 
+# REGISTRATION
 class RegistrationSerializer(serializers.ModelSerializer):
     """
     En lecture : affiche les détails du participant et de l'événement.
@@ -70,8 +62,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['id', 'registered_at']
 
+    # Empêche un participant de s'inscrire deux fois à un même évènement
     def validate(self, data):
-        """Empêche la double inscription."""
         participant = data.get('participant')
         event       = data.get('event')
 
@@ -83,12 +75,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
         return data
 
 
-# ─────────────────────────────────────────────
-# EVENT DETAIL (avec liste des inscrits)
-# ─────────────────────────────────────────────
 
 class RegistrationListSerializer(serializers.ModelSerializer):
-    """Version légère pour lister les inscrits d'un événement."""
+    """Liste les inscrits d'un événement."""
 
     participant = ParticipantSerializer(read_only=True)
 
@@ -96,7 +85,7 @@ class RegistrationListSerializer(serializers.ModelSerializer):
         model = Registration
         fields = ['id', 'participant', 'registered_at']
 
-
+#EventDetail
 class EventDetailSerializer(EventSerializer):
     """
     Étend EventSerializer en ajoutant la liste des participants inscrits.

@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap');
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 60px;
+  background: #111;
+  border-bottom: 1px solid #222;
+  font-family: 'DM Sans', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ── Brand ── */
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+.navbar-brand span {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  color: #f0ece4;
+}
+
+/* ── Links ── */
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 14px;
+  color: #666;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.nav-link:hover {
+  color: #f0ece4;
+  background: #1a1a1a;
+}
+
+.nav-link.active {
+  color: #E434ED;
+  background: rgba(141, 4, 134, 0.08);
+}
+
+/* ── Logout ── */
+
+.navbar-logout {
+  background: transparent;
+  border: 1px solid #2e2e2e;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.navbar-logout:hover {
+  color: #E434ED;
+  border-color: #E434ED;
+}

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getToken, isAuthed } from '../store/authStore';
 
 const api = axios.create({
     baseURL: process.env.REACT_APP_API_BASE
@@ -6,8 +7,8 @@ const api = axios.create({
 
 // Pour ajouter automatiquement le token dans les requête
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
+  const token = getToken();
+  if (isAuthed()) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
@@ -19,11 +20,11 @@ export const login = (username, password) =>
 export const logout = () =>
   api.post('/auth/logout/');
 
+export const register = (data) =>
+  api.post('/auth/register/', data);
+
 export default api;
 
-// ─────────────────────────────────────────────
-// ÉVÉNEMENTS
-// ─────────────────────────────────────────────
  
 // GET /events/
 export const getEvents = (filters = {}) =>
@@ -47,9 +48,6 @@ export const deleteEvent = (id) =>
   api.delete(`/events/${id}/`);
  
  
-// ─────────────────────────────────────────────
-// PARTICIPANTS
-// ─────────────────────────────────────────────
  
 // GET /participants/
 export const getParticipants = (filters = {}) =>
@@ -71,11 +69,7 @@ export const updateParticipant = (id, data) =>
 // DELETE /participants/:id/
 export const deleteParticipant = (id) =>
   api.delete(`/participants/${id}/`);
- 
- 
-// ─────────────────────────────────────────────
-// INSCRIPTIONS
-// ─────────────────────────────────────────────
+
  
 // GET /registrations/
 export const getRegistrations = (filters = {}) =>
